@@ -8,8 +8,6 @@ public class Companioner : MonoBehaviour
     [SerializeField] private GestureClick Gesture;
     [SerializeField] private Animator animator;
 
-    private readonly int OpenTrigger = Animator.StringToHash("Battle");
-
     private void Start()
     {
         Gesture.OnClick.AddListener((pos) =>
