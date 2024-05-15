@@ -3,10 +3,12 @@ using UnityEngine;
 public class EnemyAttackTrigger : MonoBehaviour
 {
     [SerializeField] private Enemy _enemy;
-    private float _time = 0;
-    [SerializeField] private float attackRate = 1;
 
     private bool hasOpener;
+    private bool canAttack = true;
+    private float coolDown = 1f;
+
+    [SerializeField] private GameObject projectfilePrefab;
 
     private void OnTriggerEnter(Collider other)
     {
@@ -26,12 +28,17 @@ public class EnemyAttackTrigger : MonoBehaviour
 
     private void Update()
     {
-        _time += Time.deltaTime;
-
-        if (hasOpener && _time > attackRate)
+        if (hasOpener && canAttack)
         {
             _enemy.Battle();
-            _time = 0;
+            canAttack = false;
+            Invoke("CanAttackAgain", coolDown);
+            Instantiate(projectfilePrefab, transform.position, _enemy.transform.rotation);
         }
+    }
+
+    private void CanAttackAgain()
+    {
+        canAttack = true;
     }
 }
