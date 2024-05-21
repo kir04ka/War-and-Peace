@@ -4,7 +4,7 @@ public class EnemyAttackTrigger : MonoBehaviour
 {
     [SerializeField] private Enemy _enemy;
 
-    private bool hasOpener;
+    private bool hasOpener = false;
     private bool canAttack = true;
     private float coolDown = 1f;
 
@@ -20,6 +20,10 @@ public class EnemyAttackTrigger : MonoBehaviour
 
     private void OnTriggerExit(Collider other)
     {
+        if (other.gameObject == null)
+        {
+            hasOpener = false;
+        }
         if (other.GetComponent<EnemyAttacker>())
         {
             hasOpener = false;

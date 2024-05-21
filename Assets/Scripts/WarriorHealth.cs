@@ -23,6 +23,7 @@ public class WarriorHealth : MonoBehaviour
         healthSlider.value = currentDeadAmount;
         if (currentDeadAmount >= amountToBeDead)
         {
+            transform.position = transform.position + new Vector3(0, 0, -1000);
             Destroy(gameObject, 0.1f);
         }
     }
